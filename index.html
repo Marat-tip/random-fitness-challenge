@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness challenge</title>
+    <script>
+        // JavaScript code goes here
+        function getExerciseToDo() {
+		var exercise_list = ["отжимания", "планка", "приседания", "скручивания"]
+		var count_base_list = Array.from({length: 5}, (_, i) => (i+1) * 10)
+
+		var multiplier_base_list = Array.from({length: 6}, (_, i) => i+3-0.5*i)
+
+		var exercise_to_do = getRandomElementFromList(exercise_list);
+
+		var count_to_do = getRandomElementFromList(count_base_list) * getRandomElementFromList(multiplier_base_list);
+
+		var general_prompt = `Сможешь ли ты сделать ${exercise_to_do} ${count_to_do} раз?`
+		var planck_prompt = `Сможешь ли ты простоять в планке за один подход в течении ${count_to_do} секунд?`
+
+		var prompt = exercise_to_do == "планка" ? planck_prompt : general_prompt
+
+		var outputElement =  document.getElementById("challengeContent")
+		outputElement.innerHTML = prompt
+        }
+
+	function getRandomElementFromList(list){
+		return list[Math.floor(Math.random()*list.length)]; 
+	}
+    </script>
+</head>
+<body>
+    <p id="challengeContent"></p>
+    <button onclick="getExerciseToDo()">Сгенерировать испытание</button>
+</body>
+</html>
+
